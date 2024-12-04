@@ -1,53 +1,85 @@
-## Part 1 Add on
-# Add extension to chrome
+# DRTV Translation Service
 
-1. enter chrome://extensions/ into chrome url bar
+This project consists of:
+1. A Chrome/Firefox extension.
+2. A local dual subtitles translation service that generates Danish and English subtitles, running locally on your computer, free of charge.
 
-2. Click add unpacked extion (or called something similar)
+---
 
-3. Navigate to this folder and choose extension folder
+## Part 1: Add-On Installation
 
+### Chrome Extension Installation
+1. Open Chrome and enter `chrome://extensions/` in the URL bar.
+2. Enable **Developer Mode** (toggle in the top right corner).
+3. Click **Load unpacked**.
+4. Navigate to this folder and select the `extension` folder.
 
-# Add extension temporarily to firefox (works until firefox restart)
+### Firefox Extension Installation (Temporary)
+1. Open Firefox and enter `about:debugging` in the URL bar.
+2. Click **This Firefox**.
+3. Click **Load Temporary Add-on**.
+4. Navigate to this folder -> `extension` and select `drtv.js`.
 
-1. Enter about:debugging into firefox url bar
+---
 
-2. Click this firefox
+## Part 2: Translator
 
-3. Load temporary add on
+The translation service runs locally on your computer, translating text for free.
 
-4. Navigate to this folder -> extension and choose drtv.js
+### Prerequisites
 
+1. Install **Python 3** and `pip`:
+   - The project was tested with Python 3.10.4, but any version 3.10 or newer should work.
+   - Resources for Python installation are available online.
+   - Verify your Python installation by running:
+    ```bash
+    python --version   # Windows
+    python3 --version  # macOS/Linux
+    ```
 
-## Part 2 translator
+2. Open a terminal and navigate to this project folder:
+   ```bash
+   cd /path/to/this/folder
+    ```
 
-The translation service is running locally on your computer, free of charge.
+3. Create a virtual environment:
+    ```bash
+    python -m venv venv
+    ```
 
+4. Activate the virtual environment:
+    ```bash
+    .\venv\Scripts\activate   # Windoes
+    source venv/bin/activate  # macOS/Linux
+    ```
 
-# Prerequisites
+5. Install the required packages:
+    ```bash
+    pip install -r requirements.txt
+    ```
 
-1. Install python3 and pip. (I used python 3.10.4 . There are plenty resources on how to do that. Verify that python works by typing python3 --version or python --version to the terminal.)
+### Running the Translation Service
 
-2. In the terminal find the source if this folder by typing:
-cd (path to this folder)
+Ensure the translation service is running whenever you want to use DRTV translations.
 
-3. Activate the virtual environment by typing in terminal: 
-.\venv\Scripts\activate
+1. Start the translation service:
+    ```bash
+    python translate_service.py
+    ```
 
-4. Install necessary packages by typing in terminal: 
-pip install -r requirements.txt
+- If the service doesn't start, consult ChatGPT for troubleshooting. Common issues include missing packages or incorrect Python installation.
 
+---
 
-# Run translation service. Make sure it is running every time you want DRTV translation
+## Part 3: Everyday Use and Instructions
 
-1. In terminal type: 
-python translate_service.py
+1. Activate the virtual environment:
+    ```bash
+    .\venv\Scripts\activate   # Windoes
+    source venv/bin/activate  # macOS/Linux
+    ```
 
-If it didn't start just ask ChatGPT what went wrong. Probably missing some packages or python is not installed correctly.
-
-
-# (Optional) Verify that translating service works
-
-1. In another terminal type: curl -X POST http://localhost:5050/translate -H "Content-Type: application/json" -d "{\"text\":\"Din danske tekst her\"}"
-
-2. If you received: {"translated_text":"Your Danish text here"}. Congratulations!
+2. Start the python script:
+    ```bash
+    python translate_service.py
+    ```
